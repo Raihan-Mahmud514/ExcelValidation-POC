@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Iterator;
+import excelvalidation.driver.DriverManager;
+import excelvalidation.module.*;
 public class readexcel {
 
 
@@ -143,19 +145,16 @@ public class readexcel {
 
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws Exception {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
         //Switch driver to project driver @parvez \\resolved
         System.setProperty("webdriver.chrome.driver", absolutePath+"\\drivers\\chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = DriverManager.getDriver();
         //Flow should be created for AMTDirect @ Parvez
         driver.get("https://app.amtdirect.com/");
         amtUtilities.sleep(5000);
-        driver.findElement(By.cssSelector("#txtUSER_NAME")).sendKeys("Parvez01");
-        driver.findElement(By.cssSelector("#txtPassword")).sendKeys("amtDirect01!");
-        driver.findElement(By.cssSelector("#txtClient_Number")).sendKeys("201533");
-        driver.findElement(By.cssSelector("input[value='Log in']")).click();
+        loginModule.execute(driver);
         amtUtilities.sleep(2000);
         driver.close();
 //        driver.manage().window().maximize();
