@@ -1,9 +1,6 @@
 package excelvalidation;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Iterator;
 
+import excelvalidation.util.amtUtilities;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -15,8 +12,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
+import java.io.InputStream;
+import java.util.Iterator;
 public class readexcel {
 
 
@@ -150,20 +150,25 @@ public class readexcel {
         System.setProperty("webdriver.chrome.driver", absolutePath+"\\drivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Flow should be created for AMTDirect @ Parvez
-        driver.get("https://www.wisdomaxis.com/technology/software/data/for-reports/");
-        System.out.println("Navigated to the URL");
-        Thread.sleep(5000);
-        driver.manage().window().maximize();
-        System.out.println("Window maximized");
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//*[@id=\"home\"]/div[6]/a[1]")).click();
-        //String a = String.valueOf(file.toPath());
-        //System.out.println(a);
-        Thread.sleep(5000);
-        System.out.println("Download completed.");
+        driver.get("https://app.amtdirect.com/");
+        amtUtilities.sleep(5000);
+        driver.findElement(By.cssSelector("#txtUSER_NAME")).sendKeys("Parvez01");
+        driver.findElement(By.cssSelector("#txtPassword")).sendKeys("amtDirect01!");
+        driver.findElement(By.cssSelector("#txtClient_Number")).sendKeys("201533");
+        driver.findElement(By.cssSelector("input[value='Log in']")).click();
+        amtUtilities.sleep(2000);
         driver.close();
-        String pathName = new File("").getAbsolutePath();
-//        System.out.println(pathName);
-        readXLSFile();
+//        driver.manage().window().maximize();
+//        System.out.println("Window maximized");
+//        Thread.sleep(2000);
+//        driver.findElement(By.xpath("//*[@id=\"home\"]/div[6]/a[1]")).click();
+//        //String a = String.valueOf(file.toPath());
+//        //System.out.println(a);
+//        Thread.sleep(5000);
+//        System.out.println("Download completed.");
+//        driver.close();
+//        String pathName = new File("").getAbsolutePath();
+////        System.out.println(pathName);
+//        readXLSFile();
     }
 }
