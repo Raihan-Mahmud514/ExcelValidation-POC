@@ -21,7 +21,7 @@ public class readexcel {
 
 
     public static final String absolutePath = new File("").getAbsolutePath();
-    public static final String EXCEL_FILE = absolutePath +"\\Newfile\\Open_Invoice_List.xlsx";
+    public static final String EXCEL_FILE = absolutePath +"\\Data\\Open_Invoice_List.xlsx";
 
     private static int getLastFilledColumn(Sheet sheet) {
         int result = 0;
@@ -120,7 +120,7 @@ public class readexcel {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream(absolutePath +"\\Newfile\\Open_Invoice_List.xlsx");
+                FileOutputStream fileOut = new FileOutputStream(absolutePath +"\\Data\\Open_Invoice_List.xlsx");
                 wb.write(fileOut);
                 fileOut.close();
 //                Iterator rows = sheet.rowIterator();
@@ -146,8 +146,8 @@ public class readexcel {
     public static void main(String[] args) throws InterruptedException {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
-        //Switch driver to project driver @parvez
-        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver\\chromedriver.exe");
+        //Switch driver to project driver @parvez \\resolved
+        System.setProperty("webdriver.chrome.driver", absolutePath+"\\drivers\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         //Flow should be created for AMTDirect @ Parvez
         driver.get("https://www.wisdomaxis.com/technology/software/data/for-reports/");

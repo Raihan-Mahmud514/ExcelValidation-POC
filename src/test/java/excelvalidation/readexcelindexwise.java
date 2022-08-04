@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 public class readexcelindexwise {
 
     public static final String absoultePath = new File("").getAbsolutePath();
-    public static final String EXCEL_FILE =  absoultePath +"\\Newfile\\Open_Invoice_List.xlsx";
+    public static final String EXCEL_FILE =  absoultePath +"\\Data\\Open_Invoice_List.xlsx";
 
 
     private static int getLastFilledColumn(Sheet sheet) {
@@ -115,7 +115,7 @@ public class readexcelindexwise {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream( absoultePath +"\\Newfile\\Open_Invoice_List.xlsx");
+                FileOutputStream fileOut = new FileOutputStream( absoultePath +"\\Data\\Open_Invoice_List.xlsx");
 
                 wb.write(fileOut);
                 fileOut.close();
