@@ -11,16 +11,14 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import java.io.FileOutputStream;
 
+import java.io.FileOutputStream;
 
 public class readexcel {
 
 
-    public static final String EXCEL_FILE = "C:\\Users\\DSi\\Downloads\\prettyrandom\\Newfile\\Open_Invoice_List.xlsx";
+    public static final String absolutePath = new File("").getAbsolutePath();
+    public static final String EXCEL_FILE = absolutePath +"\\Newfile\\Open_Invoice_List.xlsx";
 
     private static int getLastFilledColumn(Sheet sheet) {
         int result = 0;
@@ -32,14 +30,15 @@ public class readexcel {
     }
 
     public static void readXLSFile() {
+
         try {
             InputStream ExcelFileToRead = new FileInputStream(EXCEL_FILE);
             XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
             XSSFWorkbook workbook = null;
 
-
-            for(int k=0; k<wb.getNumberOfSheets();k++) {
-                XSSFSheet sheet = wb.getSheetAt(k);
+            // sheet Iterator
+            for(int sheetNumber=0; sheetNumber<wb.getNumberOfSheets();sheetNumber++) {
+                XSSFSheet sheet = wb.getSheetAt(sheetNumber);
                 Boolean isRowEmpty=false;
 
 //
@@ -80,13 +79,15 @@ public class readexcel {
                 }
 
                 // main logic block
-                for (int i = 0; i< sheet.getLastRowNum(); i++) {
-                    if (sheet.getRow(i) != null) {
+                //row iterator
+                for (int rowNumber = 0; rowNumber< sheet.getLastRowNum(); rowNumber++) {
+                    if (sheet.getRow(rowNumber) != null) {
                         isRowEmpty = true;
-                        Row row = sheet.getRow(i);
-                        for (int j = firstColumn; j < endColumn; j++) {
-                            if (j >= row.getFirstCellNum() && j < row.getLastCellNum()) {
-                                Cell cell = row.getCell(j);
+                        Row row = sheet.getRow(rowNumber);
+                        // column iterator
+                        for (int columnNumber = firstColumn; columnNumber < endColumn; columnNumber++) {
+                            if (columnNumber >= row.getFirstCellNum() && columnNumber < row.getLastCellNum()) {
+                                Cell cell = row.getCell(columnNumber);
                                 if (cell != null) {
                                     if (!cell.getStringCellValue().equals("")) {
                                         isRowEmpty = false;
@@ -99,13 +100,13 @@ public class readexcel {
                         if (isRowEmpty) {
                             System.out.println("Found empty row on: " + row.getRowNum());
                             sheet.shiftRows(row.getRowNum() + 1, sheet.getLastRowNum(), -1);
-                            i--;
+                            rowNumber--;
                         }
                     }
                     // if row is null
                     else{
-                        sheet.shiftRows(i + 1, sheet.getLastRowNum(), -1);
-                        i--;
+                        sheet.shiftRows(rowNumber + 1, sheet.getLastRowNum(), -1);
+                        rowNumber--;
                     }
                 }
 
@@ -116,7 +117,7 @@ public class readexcel {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream("C:\\Users\\DSi\\Downloads\\prettyrandom\\Newfile\\Open_Invoice_List.xlsx");
+                FileOutputStream fileOut = new FileOutputStream(absolutePath +"\\Newfile\\Open_Invoice_List.xlsx");
                 wb.write(fileOut);
                 fileOut.close();
 //                Iterator rows = sheet.rowIterator();
@@ -155,7 +156,10 @@ public class readexcel {
 //        //System.out.println(a);
 //        Thread.sleep(5000);
 //        System.out.println("Download completed.");
-//        driver.close();
+//        driver.close()
+//        ;
+        String pathName = new File("").getAbsolutePath();
+//        System.out.println(pathName);
         readXLSFile();
     }
 }
