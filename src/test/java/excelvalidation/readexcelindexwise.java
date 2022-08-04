@@ -11,16 +11,14 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+
 import java.io.FileOutputStream;
 
 
 public class readexcelindexwise {
 
-
-    public static final String EXCEL_FILE = "C:\\Users\\DSi\\Downloads\\prettyrandom\\Newfile\\Open_Invoice_List.xlsx";
+    public static final String absoultePath = new File("").getAbsolutePath();
+    public static final String EXCEL_FILE =  absoultePath +"\\Newfile\\Open_Invoice_List.xlsx";
 
 
     private static int getLastFilledColumn(Sheet sheet) {
@@ -38,9 +36,9 @@ public class readexcelindexwise {
             XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
             XSSFWorkbook workbook = null;
 
-
-            for(int k=0; k<wb.getNumberOfSheets();k++) {
-                XSSFSheet sheet = wb.getSheetAt(k);
+                //sheet iterator
+            for(int sheetNumber=0; sheetNumber<wb.getNumberOfSheets();sheetNumber++) {
+                XSSFSheet sheet = wb.getSheetAt(sheetNumber);
                 Boolean isRowEmpty=false;
 
 //
@@ -98,7 +96,7 @@ public class readexcelindexwise {
                         }
                         //if empty
                         if (isRowEmpty) {
-                            //System.out.println("Found empty row on: " + row.getRowNum());
+                            System.out.println("Found empty row on: " + row.getRowNum());
                             sheet.shiftRows(row.getRowNum() + 1, sheet.getLastRowNum(), -1);
                             i--;
                         }
@@ -117,7 +115,7 @@ public class readexcelindexwise {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream("C:\\Users\\DSi\\Downloads\\prettyrandom\\Newfile\\Open_Invoice_List.xlsx");
+                FileOutputStream fileOut = new FileOutputStream( absoultePath +"\\Newfile\\Open_Invoice_List.xlsx");
 
                 wb.write(fileOut);
                 fileOut.close();
