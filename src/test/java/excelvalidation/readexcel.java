@@ -11,6 +11,9 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.FileOutputStream;
 
@@ -143,21 +146,22 @@ public class readexcel {
     public static void main(String[] args) throws InterruptedException {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
-//        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver\\chromedriver.exe");
-//        WebDriver driver = new ChromeDriver();
-//        driver.get("https://www.wisdomaxis.com/technology/software/data/for-reports/");
-//        System.out.println("Navigated to the URL");
-//        Thread.sleep(5000);
-//        driver.manage().window().maximize();
-//        System.out.println("Window maximized");
-//        Thread.sleep(2000);
-//        driver.findElement(By.xpath("//*[@id=\"home\"]/div[6]/a[1]")).click();
-//        //String a = String.valueOf(file.toPath());
-//        //System.out.println(a);
-//        Thread.sleep(5000);
-//        System.out.println("Download completed.");
-//        driver.close()
-//        ;
+        //Switch driver to project driver @parvez
+        System.setProperty("webdriver.chrome.driver", "D:\\chromedriver\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
+        //Flow should be created for AMTDirect @ Parvez
+        driver.get("https://www.wisdomaxis.com/technology/software/data/for-reports/");
+        System.out.println("Navigated to the URL");
+        Thread.sleep(5000);
+        driver.manage().window().maximize();
+        System.out.println("Window maximized");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//*[@id=\"home\"]/div[6]/a[1]")).click();
+        //String a = String.valueOf(file.toPath());
+        //System.out.println(a);
+        Thread.sleep(5000);
+        System.out.println("Download completed.");
+        driver.close();
         String pathName = new File("").getAbsolutePath();
 //        System.out.println(pathName);
         readXLSFile();
