@@ -5,10 +5,10 @@ import com.relevantcodes.extentreports.ExtentTest;
 
 import java.io.File;
 
-import static excelvalidation.readexcel.*;
-import static excelvalidation.util.amtUtilities.*;
+import static excelvalidation.MAIN.*;
+import static excelvalidation.util.AmtUtilities.*;
 
-public class automationReporter {
+public class AutomationReporter {
 
     public static ExtentTest initializeReporter() throws Exception {
         createDir(dirPath,"Reports");

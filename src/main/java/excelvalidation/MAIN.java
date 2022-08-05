@@ -3,14 +3,14 @@ package excelvalidation;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import excelvalidation.driver.DriverManager;
-import excelvalidation.module.apManagerModule;
-import excelvalidation.module.loginModule;
-import excelvalidation.util.automationReporter;
+import excelvalidation.module.APManagerModule;
+import excelvalidation.module.LoginModule;
+import excelvalidation.util.AutomationReporter;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 
-public class readexcel {
+public class MAIN {
     public static ExtentReports extent;
     public static ExtentTest test;
 
@@ -20,17 +20,17 @@ public class readexcel {
 
     public static void main(String[] args) throws Exception {
         //Start Reporter
-        automationReporter.initializeReporter();
+        AutomationReporter.initializeReporter();
         //Driver Instance
         WebDriver driver = DriverManager.getDriver(false);//flag is for switch between headless and headed
         //Flow should be created for AMTDirect @ Parvez
-       automationReporter.startReporter("Login Test");
-           loginModule.execute(driver,test);
-        automationReporter.endReporter();
-        automationReporter.startReporter("AP Module");
-          apManagerModule.execute(driver,test);
-        automationReporter.endReporter();
-        automationReporter.closeReporter();
+       AutomationReporter.startReporter("Login Test");
+           LoginModule.execute(driver,test);
+        AutomationReporter.endReporter();
+        AutomationReporter.startReporter("AP Module");
+          APManagerModule.execute(driver,test);
+        AutomationReporter.endReporter();
+        AutomationReporter.closeReporter();
         System.out.println("Finished Testing");
         driver.close();
     }

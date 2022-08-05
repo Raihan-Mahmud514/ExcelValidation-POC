@@ -1,6 +1,5 @@
 package excelvalidation.driver;
 
-import excelvalidation.readexcel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,13 +9,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.HashMap;
 
 
-import static excelvalidation.readexcel.dirPath;
-import static excelvalidation.util.amtUtilities.createDir;
+import static excelvalidation.MAIN.dirPath;
+import static excelvalidation.util.AmtUtilities.createDir;
 
 public class DriverManager {
     public static   WebDriver getDriver(boolean flag) throws Exception {
         createDir(dirPath,"Data");
-        System.setProperty("webdriver.chrome.driver", dirPath +"\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", dirPath +"\\Drivers\\chromedriver.exe");
         WebDriver driver = chromeDriver(flag);
         return driver;
     }

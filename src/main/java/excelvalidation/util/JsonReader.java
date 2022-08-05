@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
 
-public class jsonReader {
+public class JsonReader {
     public static HashMap<String,String> configReader(String fileName) {
         JSONParser parser = new JSONParser();
         HashMap<String, String> data = new HashMap < String, String >();

@@ -11,10 +11,10 @@ import org.openqa.selenium.WebDriver;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
-import static excelvalidation.readexcel.dataPath;
-import static excelvalidation.readexcel.dirPath;
+import static excelvalidation.MAIN.dataPath;
+import static excelvalidation.MAIN.dirPath;
 
-public class amtUtilities {
+public class AmtUtilities {
     public static void sleep(int milliseconds) {
         try {
             TimeUnit.MILLISECONDS.sleep(milliseconds);
