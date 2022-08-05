@@ -21,6 +21,7 @@ public class loginModule {
         driver.findElement(By.cssSelector("#txtPassword")).sendKeys(loginData.get("password"));
         driver.findElement(By.cssSelector("#txtClient_Number")).sendKeys(loginData.get("clientId"));
         driver.findElement(By.cssSelector("input[value='Log in']")).click();
+        test.log(LogStatus.PASS,"Login Successful");
         amtUtilities.sleep(2000);
 //        automationReporter.endReporter();
     }

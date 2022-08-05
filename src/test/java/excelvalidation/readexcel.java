@@ -196,15 +196,9 @@ public class readexcel {
         automationReporter.startReporter("AP Module");
           apManagerModule.execute(driver,test);
         automationReporter.endReporter();
-//        moveFiles(dirPath);
-//        extent.endTest(test);
-//        extent.flush();
-
-
+        moveFiles(dirPath);
         automationReporter.closeReporter();
-
-        System.out.println("I am here");
+        System.out.println("Finished Testing");
         driver.close();
-//        readXLSFile();
     }
 }
