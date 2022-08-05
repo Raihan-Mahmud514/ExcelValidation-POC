@@ -1,7 +1,6 @@
 package excelvalidation.util;
 import org.apache.commons.io.FileUtils;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -90,7 +89,7 @@ public class amtUtilities {
 
     public static void readXLSFile(String fileName) {
         try {
-            InputStream ExcelFileToRead = new FileInputStream(dataPath+fileName);
+            InputStream ExcelFileToRead = new FileInputStream(fileName);
             XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
             XSSFWorkbook workbook = null;
 
@@ -178,7 +177,7 @@ public class amtUtilities {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream(dataPath+fileName);
+                FileOutputStream fileOut = new FileOutputStream(fileName);
                 wb.write(fileOut);
                 fileOut.close();
 //                Iterator rows = sheet.rowIterator();
@@ -199,6 +198,67 @@ public class amtUtilities {
             e.printStackTrace();
         }
 
+    }
+
+    public static String ReadCellData(String dataFileWithPath, int vRow, int vColumn) {
+        String value = ""; //variable for storing the cell value
+        Workbook wbook = null; //initialize Workbook null
+        try {
+            //reading data from a file in the form of bytes
+            System.out.println(dataFileWithPath+"Inside readcelldata");
+            FileInputStream fis = new FileInputStream(dataFileWithPath);
+
+            //creates an XSSFWorkbook object by buffering the whole stream into the memory
+            wbook = new XSSFWorkbook(fis);
+        }
+        catch(FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch(IOException e1) {
+            e1.printStackTrace();
+        }
+        Sheet sheet = wbook.getSheetAt(0);
+        //getting the XSSFSheet object at given index
+        Row row = sheet.getRow(vRow);
+        //returns the logical row
+        Cell cell = row.getCell(vColumn);
+        //getting the cell representing the given column
+
+//        switch (cell.getCellType()) {
+//            case Cell.CELL_TYPE_STRING:
+//                //field that represents string cell type
+//                System.out.print(cell.getStringCellValue() + "\t\t\t");
+//                break;
+//            case Cell.CELL_TYPE_NUMERIC:
+//                //field that represents number cell type
+//                System.out.print(cell.getNumericCellValue() + "\t\t\t");
+//                break;
+//            default:
+//        }
+
+        CellType type = cell.getCellTypeEnum();
+//        if(cell.getStringCellValue().length()>0) {
+//            value = cell.getStringCellValue();
+//        }
+//        else{
+//            System.out.println("Null");
+//        }
+
+        if (type == CellType.STRING) {
+            value = cell.getStringCellValue();
+        } else if (type == CellType.NUMERIC) {
+            System.out.println(((Object)cell.getNumericCellValue()).getClass().getSimpleName());
+            value = String.valueOf(cell.getNumericCellValue());
+        } else if (type == CellType.BOOLEAN) {
+            value = String.valueOf(cell.getBooleanCellValue());
+        } else if (type == CellType.BLANK) {
+            value = "";
+        }
+
+        //System.out.println(value.length());
+        //getting cell value
+        return value;
+        //returns the cell value
     }
 
 

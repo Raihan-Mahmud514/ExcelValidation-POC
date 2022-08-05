@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 
+import static excelvalidation.readexcel.dataPath;
 import static excelvalidation.readexcel.dirPath;
 import static excelvalidation.util.amtUtilities.*;
 
@@ -30,7 +31,9 @@ public class apManagerModule {
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
-        readXLSFile(getFile());
+        System.out.println(dataPath);
+        readXLSFile(dataPath+getFile());
+        System.out.println(amtUtilities.ReadCellData(dataPath+getFile(), 2, 8));
         // Moving previous file to vault
         moveFiles(dirPath);
     }
