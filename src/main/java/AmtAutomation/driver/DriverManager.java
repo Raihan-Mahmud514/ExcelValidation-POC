@@ -33,9 +33,6 @@ public class DriverManager {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.setExperimentalOption("prefs", chromePrefs);
-        DesiredCapabilities cap = DesiredCapabilities.chrome();
-        cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        cap.setCapability(ChromeOptions.CAPABILITY, options);
         if (flag){
             options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
             System.out.println("Running Headless");
