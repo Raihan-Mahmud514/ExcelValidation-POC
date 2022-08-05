@@ -6,6 +6,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import java.io.File;
 
 import static excelvalidation.readexcel.*;
+import static excelvalidation.util.amtUtilities.*;
 
 public class automationReporter {
 

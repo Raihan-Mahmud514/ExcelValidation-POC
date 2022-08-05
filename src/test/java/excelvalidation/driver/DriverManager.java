@@ -9,8 +9,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.HashMap;
 
-import static excelvalidation.readexcel.createDir;
+
 import static excelvalidation.readexcel.dirPath;
+import static excelvalidation.util.amtUtilities.createDir;
 
 public class DriverManager {
     public static   WebDriver getDriver(boolean flag) throws Exception {
