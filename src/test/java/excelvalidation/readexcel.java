@@ -189,12 +189,13 @@ public class readexcel {
         }
     }
     public static void moveFiles(String path){
-        File src = new File(path+"Data");
+        File src = new File(path+"\\Data");
         createDir(dirPath,"DataVault");
-        File dest = new File(path+"DataVault");
+        File dest = new File(path+"\\DataVault");
 
         try {
             FileUtils.copyDirectory(src, dest);
+            System.out.println("Moving previous datafiles to vault");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -208,9 +209,6 @@ public class readexcel {
 
 
     public static void main(String[] args) throws Exception {
-//        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
-//        file.delete();
-
         //Reports
         automationReporter.initializeReporter();
         //create a new download directory if it doesn't exist already, skip if there is already one
@@ -224,10 +222,11 @@ public class readexcel {
         automationReporter.startReporter("AP Module");
           apManagerModule.execute(driver,test);
         automationReporter.endReporter();
-        moveFiles(dirPath);
         automationReporter.closeReporter();
         System.out.println("Finished Testing");
         driver.close();
         readXLSFile(getFile());
+        // Moving previous file to vault
+        moveFiles(dirPath);
     }
 }
