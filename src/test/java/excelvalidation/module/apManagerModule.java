@@ -9,6 +9,9 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 
+import static excelvalidation.readexcel.dirPath;
+import static excelvalidation.util.amtUtilities.*;
+
 public class apManagerModule {
     public static void execute(WebDriver driver, ExtentTest test) throws Exception{
         System.out.println("Navigating AP Manager");
@@ -27,5 +30,8 @@ public class apManagerModule {
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
+        readXLSFile(getFile());
+        // Moving previous file to vault
+        moveFiles(dirPath);
     }
 }
