@@ -1,11 +1,11 @@
-package excelvalidation;
+package AmtAutomation;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
-import excelvalidation.driver.DriverManager;
-import excelvalidation.module.APManagerModule;
-import excelvalidation.module.LoginModule;
-import excelvalidation.util.AutomationReporter;
+import AmtAutomation.driver.DriverManager;
+import AmtAutomation.module.APManagerModule;
+import AmtAutomation.module.LoginModule;
+import AmtAutomation.util.AutomationReporter;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;

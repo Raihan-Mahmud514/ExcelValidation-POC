@@ -1,14 +1,14 @@
-package excelvalidation.module;
+package AmtAutomation.module;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import excelvalidation.util.AmtUtilities;
+import AmtAutomation.util.AmtUtilities;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static excelvalidation.MAIN.dataPath;
-import static excelvalidation.MAIN.dirPath;
-import static excelvalidation.util.AmtUtilities.*;
+import static AmtAutomation.MAIN.dataPath;
+import static AmtAutomation.MAIN.dirPath;
+import static AmtAutomation.util.AmtUtilities.*;
 
 public class APManagerModule {
     public static void execute(WebDriver driver, ExtentTest test) throws Exception{

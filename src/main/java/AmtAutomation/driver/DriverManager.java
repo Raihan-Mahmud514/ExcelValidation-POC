@@ -1,4 +1,4 @@
-package excelvalidation.driver;
+package AmtAutomation.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,8 +9,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.util.HashMap;
 
 
-import static excelvalidation.MAIN.dirPath;
-import static excelvalidation.util.AmtUtilities.createDir;
+import static AmtAutomation.MAIN.dirPath;
+import static AmtAutomation.util.AmtUtilities.createDir;
 
 public class DriverManager {
     public static   WebDriver getDriver(boolean flag) throws Exception {

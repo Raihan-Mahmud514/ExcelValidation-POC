@@ -1,8 +1,8 @@
-package excelvalidation.module;
+package AmtAutomation.module;
 
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import excelvalidation.util.*;
+import AmtAutomation.util.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

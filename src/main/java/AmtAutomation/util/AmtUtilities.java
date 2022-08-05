@@ -1,4 +1,4 @@
-package excelvalidation.util;
+package AmtAutomation.util;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.*;
@@ -11,8 +11,8 @@ import org.openqa.selenium.WebDriver;
 import java.io.*;
 import java.util.concurrent.TimeUnit;
 
-import static excelvalidation.MAIN.dataPath;
-import static excelvalidation.MAIN.dirPath;
+import static AmtAutomation.MAIN.dataPath;
+import static AmtAutomation.MAIN.dirPath;
 
 public class AmtUtilities {
     public static void sleep(int milliseconds) {

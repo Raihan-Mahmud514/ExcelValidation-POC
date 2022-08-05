@@ -1,12 +1,12 @@
-package excelvalidation.util;
+package AmtAutomation.util;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
 import java.io.File;
 
-import static excelvalidation.MAIN.*;
-import static excelvalidation.util.AmtUtilities.*;
+import static AmtAutomation.MAIN.*;
+import static AmtAutomation.util.AmtUtilities.*;
 
 public class AutomationReporter {
 
