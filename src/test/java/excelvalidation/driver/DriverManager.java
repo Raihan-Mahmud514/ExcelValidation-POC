@@ -32,7 +32,7 @@ public class DriverManager {
     }
 
     private static ChromeOptions defaultChromeOptions(boolean flag) throws Exception {
-        String downloadFilepath = readexcel.dirPath+"/download";
+        String downloadFilepath = readexcel.dirPath+"\\Data";
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadFilepath);

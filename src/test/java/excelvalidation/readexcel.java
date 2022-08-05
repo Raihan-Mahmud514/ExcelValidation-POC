@@ -1,6 +1,7 @@
 package excelvalidation;
 
 import excelvalidation.util.amtUtilities;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -11,10 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Iterator;
 import excelvalidation.driver.DriverManager;
 import excelvalidation.module.*;
@@ -143,15 +141,47 @@ public class readexcel {
         }
 
     }
+    public static void createDir(String path, String dir){
+        String directoryName = dirPath+dir;
+
+        File directory = new File(directoryName);
+        if (! directory.exists()){
+            directory.mkdir();
+            // If you require it to make the entire directory path including parents,
+            // use directory.mkdirs(); here instead.
+        }
+    }
+    public static void moveFiles(String path){
+        File src = new File(path+"//Data");
+        createDir(dirPath,"DataVault");
+        File dest = new File(path+"//DataVault");
+
+        try {
+            FileUtils.copyDirectory(src, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            FileUtils.cleanDirectory(src);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 
     public static void main(String[] args) throws Exception {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
+        //create a new download directory if it doesn't exist already, skip if there is already one
+        createDir(dirPath,"Data"); // we can also clean up file before running the test each time
         //Switch driver to project driver @parvez \\resolved
-        //flag is for switch between headless and headed
-        WebDriver driver = DriverManager.getDriver(false);
+        WebDriver driver = DriverManager.getDriver(false); //flag is for switch between headless and headed
         //Flow should be created for AMTDirect @ Parvez
         loginModule.execute(driver);
+        apManagerModule.execute(driver);
+        moveFiles(dirPath);
+        System.out.println("I am here");
         driver.close();
 //        readXLSFile();
     }
