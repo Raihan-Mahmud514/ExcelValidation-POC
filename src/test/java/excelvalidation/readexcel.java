@@ -46,7 +46,5 @@ public class readexcel {
         automationReporter.closeReporter();
         System.out.println("Finished Testing");
         driver.close();
-
-
     }
 }

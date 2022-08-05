@@ -27,13 +27,20 @@ public class apManagerModule {
         amtUtilities.sleep(15000);
         driver.findElement(By.xpath("//div[@class='divReportIcons divReportIcons_rfp']//span[@class='k-sprite a-icon file-xl']")).click();
         test.log(LogStatus.PASS,"Able to download the data");
-        amtUtilities.sleep(60000);
+        amtUtilities.sleep(35000);
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
         System.out.println(dataPath);
         readXLSFile(dataPath+getFile());
-        System.out.println(amtUtilities.ReadCellData(dataPath+getFile(), 2, 8));
+        if(amtUtilities.ValidateDoubleData(dataPath+getFile(), 2, 8, 100.0)){
+            System.out.println("Assertion Successful");
+            test.log(LogStatus.PASS,"Able to validate the invoice amount is equal amount is equal to -100");
+        }
+        else {
+            System.out.println("Assertion Unsuccessful");
+            test.log(LogStatus.FAIL,"Unable to validate the invoice amount is equal amount is equal to -100");
+        }
         // Moving previous file to vault
         moveFiles(dirPath);
     }

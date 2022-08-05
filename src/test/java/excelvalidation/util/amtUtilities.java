@@ -200,12 +200,12 @@ public class amtUtilities {
 
     }
 
-    public static String ReadCellData(String dataFileWithPath, int vRow, int vColumn) {
+    public static boolean ValidateDoubleData(String dataFileWithPath, int vRow, int vColumn, double expectedValue) {
         String value = ""; //variable for storing the cell value
         Workbook wbook = null; //initialize Workbook null
         try {
             //reading data from a file in the form of bytes
-            System.out.println(dataFileWithPath+"Inside readcelldata");
+
             FileInputStream fis = new FileInputStream(dataFileWithPath);
 
             //creates an XSSFWorkbook object by buffering the whole stream into the memory
@@ -257,7 +257,19 @@ public class amtUtilities {
 
         //System.out.println(value.length());
         //getting cell value
-        return value;
+        System.out.println(expectedValue+"-- expectedValue");
+        System.out.println(cell.getNumericCellValue()+" -- Actual Value");
+
+
+        if (cell.getNumericCellValue()==expectedValue){
+            System.out.println("I am here");
+            return true;
+        }
+        else {
+            System.out.println("Opps");
+            return false;
+        }
+
         //returns the cell value
     }
 
