@@ -3,11 +3,8 @@ package excelvalidation.module;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import excelvalidation.util.amtUtilities;
-import excelvalidation.util.jsonReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
-import java.util.HashMap;
 
 import static excelvalidation.readexcel.dataPath;
 import static excelvalidation.readexcel.dirPath;
@@ -15,6 +12,7 @@ import static excelvalidation.util.amtUtilities.*;
 
 public class apManagerModule {
     public static void execute(WebDriver driver, ExtentTest test) throws Exception{
+        moveFiles(dirPath,"Data");
         System.out.println("Navigating AP Manager");
         amtUtilities.sleep(5000);
         driver.findElement(By.xpath("//a[@title='Accounting']")).click();
@@ -31,9 +29,9 @@ public class apManagerModule {
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
-        System.out.println(dataPath);
-        readXLSFile(dataPath+getFile());
-        if(amtUtilities.ValidateDoubleData(dataPath+getFile(), 2, 8, 100.0)){
+        String fileName = getFile(driver);
+        readXLSFile(dataPath+fileName);
+        if(amtUtilities.ValidateDoubleData(dataPath+fileName, 2, 8, 100.0)){
             System.out.println("Assertion Successful");
             test.log(LogStatus.PASS,"Able to validate the invoice amount is equal amount is equal to -100");
         }
@@ -42,6 +40,6 @@ public class apManagerModule {
             test.log(LogStatus.FAIL,"Unable to validate the invoice amount is equal amount is equal to -100");
         }
         // Moving previous file to vault
-        moveFiles(dirPath);
+        moveFiles(dirPath,"Data");
     }
 }

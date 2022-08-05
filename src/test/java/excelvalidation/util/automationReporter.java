@@ -10,7 +10,7 @@ import static excelvalidation.util.amtUtilities.*;
 
 public class automationReporter {
 
-    public static ExtentTest initializeReporter() {
+    public static ExtentTest initializeReporter() throws Exception {
         createDir(dirPath,"Reports");
         extent = new ExtentReports(dirPath + "\\Reports\\AMT_Automation_Results.html", true);
         extent.loadConfig(new File(dirPath + "\\extent-config.xml"));

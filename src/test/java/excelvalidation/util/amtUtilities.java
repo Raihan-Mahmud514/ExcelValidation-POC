@@ -1,10 +1,12 @@
 package excelvalidation.util;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.WebDriver;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;
@@ -22,10 +24,14 @@ public class amtUtilities {
             e.printStackTrace();
         }
     }
-    public static void moveFiles(String path){
-        File src = new File(path+"\\Data");
-        createDir(dirPath,"DataVault");
-        File dest = new File(path+"\\DataVault");
+    public static void moveFiles(String path, String dir) throws Exception{
+        File src = new File(path+"\\"+dir);
+        String VaultDirectoryName = dirPath+"\\"+dir;
+        File directory = new File(VaultDirectoryName);
+        if (! directory.exists()){
+            createDir(dirPath,dir+"Vault");
+        }
+        File dest = new File(path+"\\"+dir+"Vault");
 
         try {
             FileUtils.copyDirectory(src, dest);
@@ -38,22 +44,41 @@ public class amtUtilities {
         } catch (Exception e){
             e.printStackTrace();
         }
-
     }
-    public static void createDir(String path, String dir){
-        String directoryName = dirPath+"\\"+dir;
 
+    public static void createDir(String path, String dir) throws Exception{
+        System.out.println(path + dir + " Debugger");
+        String directoryName = dirPath+"\\"+dir;
         File directory = new File(directoryName);
         if (! directory.exists()){
             directory.mkdir();
             System.out.println("Created New Directory- "+dir);
-            // If you require it to make the entire directory path including parents,
-            // use directory.mkdirs(); here instead.
+        }
+        else{
+            File src = new File(path+"\\"+dir);
+            String VaultDirectoryName = dirPath+"\\"+dir;
+            directory = new File(VaultDirectoryName);
+            if (! directory.exists()){
+                createDir(dirPath,dir+"Vault");
+            }
+            System.out.println(dir+"Vault");
+            File dest = new File(path+"\\"+dir+"Vault");
+
+            try {
+                FileUtils.copyDirectory(src, dest);
+                System.out.println("Moving previous datafiles to vault");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                FileUtils.cleanDirectory(src);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
-    public static String getFile()
-    {
+    public static String getFile(WebDriver driver) throws InterruptedException {
         String dataFile = "";
         //Creating a File object for directory
         File directoryPath = new File(dataPath);
@@ -75,7 +100,25 @@ public class amtUtilities {
             break;
         }
         return "\\"+dataFile;
-    }
+        // navigate to chrome downloads
+//        driver.get("chrome://downloads");
+//
+//        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+//        // wait until the file is downloaded
+//        Long percentage = (long) 0;
+//        while ( percentage!= 100) {
+//            try {
+//                percentage = (Long) js1.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#downloadsList downloads-item').shadowRoot.querySelector('#progress').value");
+//                //System.out.println(percentage);
+//            }catch (Exception e) {
+//                // Nothing to do just wait
+//            }
+//            Thread.sleep(1000);
+//        }
+//        // get the latest downloaded file name
+//        String fileName = (String) js1.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#downloadsList downloads-item').shadowRoot.querySelector('div#content #file-link').text");
+//        return fileName;
+   }
 
 
     private static int getLastFilledColumn(Sheet sheet) {
@@ -222,28 +265,7 @@ public class amtUtilities {
         Row row = sheet.getRow(vRow);
         //returns the logical row
         Cell cell = row.getCell(vColumn);
-        //getting the cell representing the given column
-
-//        switch (cell.getCellType()) {
-//            case Cell.CELL_TYPE_STRING:
-//                //field that represents string cell type
-//                System.out.print(cell.getStringCellValue() + "\t\t\t");
-//                break;
-//            case Cell.CELL_TYPE_NUMERIC:
-//                //field that represents number cell type
-//                System.out.print(cell.getNumericCellValue() + "\t\t\t");
-//                break;
-//            default:
-//        }
-
         CellType type = cell.getCellTypeEnum();
-//        if(cell.getStringCellValue().length()>0) {
-//            value = cell.getStringCellValue();
-//        }
-//        else{
-//            System.out.println("Null");
-//        }
-
         if (type == CellType.STRING) {
             value = cell.getStringCellValue();
         } else if (type == CellType.NUMERIC) {
@@ -255,23 +277,15 @@ public class amtUtilities {
             value = "";
         }
 
-        //System.out.println(value.length());
-        //getting cell value
         System.out.println(expectedValue+"-- expectedValue");
         System.out.println(cell.getNumericCellValue()+" -- Actual Value");
 
 
         if (cell.getNumericCellValue()==expectedValue){
-            System.out.println("I am here");
             return true;
         }
         else {
-            System.out.println("Opps");
             return false;
         }
-
-        //returns the cell value
     }
-
-
 }
