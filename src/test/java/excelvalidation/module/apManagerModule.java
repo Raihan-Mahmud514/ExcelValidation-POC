@@ -24,5 +24,8 @@ public class apManagerModule {
         driver.findElement(By.xpath("//div[@class='divReportIcons divReportIcons_rfp']//span[@class='k-sprite a-icon file-xl']")).click();
         test.log(LogStatus.PASS,"Able to download the data");
         amtUtilities.sleep(60000);
+        driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
+        driver.close();
+        driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
     }
 }
