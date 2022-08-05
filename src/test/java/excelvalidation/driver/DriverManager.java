@@ -14,6 +14,7 @@ import static excelvalidation.readexcel.dirPath;
 
 public class DriverManager {
     public static   WebDriver getDriver(boolean flag) throws Exception {
+        createDir(dirPath,"Data");
         System.setProperty("webdriver.chrome.driver", dirPath +"\\drivers\\chromedriver.exe");
         WebDriver driver = chromeDriver(flag);
         return driver;
@@ -25,7 +26,6 @@ public class DriverManager {
     }
 
     private static ChromeOptions defaultChromeOptions(boolean flag) throws Exception {
-        createDir(dirPath,"Data");
         String downloadFilepath = dirPath+"\\Data";
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);

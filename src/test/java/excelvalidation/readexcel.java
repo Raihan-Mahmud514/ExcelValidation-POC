@@ -150,19 +150,20 @@ public class readexcel {
 
     }
     public static void createDir(String path, String dir){
-        String directoryName = dirPath+dir;
+        String directoryName = dirPath+"\\"+dir;
 
         File directory = new File(directoryName);
         if (! directory.exists()){
             directory.mkdir();
+            System.out.println("Created New Directory- "+dir);
             // If you require it to make the entire directory path including parents,
             // use directory.mkdirs(); here instead.
         }
     }
     public static void moveFiles(String path){
-        File src = new File(path+"//Data");
+        File src = new File(path+"Data");
         createDir(dirPath,"DataVault");
-        File dest = new File(path+"//DataVault");
+        File dest = new File(path+"DataVault");
 
         try {
             FileUtils.copyDirectory(src, dest);
@@ -182,20 +183,18 @@ public class readexcel {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
         //Reports
-
         automationReporter.initializeReporter();
-
         //create a new download directory if it doesn't exist already, skip if there is already one
-        //        createDir(dirPath,"Data"); // we can also clean up file before running the test each time
+//        createDir(dirPath,"Data"); // we can also clean up file before running the test each time
         //Switch driver to project driver @parvez \\resolved
         WebDriver driver = DriverManager.getDriver(false); //flag is for switch between headless and headed
         //Flow should be created for AMTDirect @ Parvez
         automationReporter.startReporter("Login Test");
            loginModule.execute(driver,test);
         automationReporter.endReporter();
-        automationReporter.startReporter("AP Module");
-          apManagerModule.execute(driver,test);
-        automationReporter.endReporter();
+//        automationReporter.startReporter("AP Module");
+//          apManagerModule.execute(driver,test);
+//        automationReporter.endReporter();
         moveFiles(dirPath);
         automationReporter.closeReporter();
         System.out.println("Finished Testing");
