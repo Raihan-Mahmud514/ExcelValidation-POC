@@ -1,6 +1,7 @@
 package excelvalidation;
 
 import excelvalidation.util.amtUtilities;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -8,9 +9,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,8 +21,8 @@ import excelvalidation.module.*;
 public class readexcel {
 
 
-    public static final String absolutePath = new File("").getAbsolutePath();
-    public static final String EXCEL_FILE = absolutePath +"\\Data\\Open_Invoice_List.xlsx";
+    public static final String dirPath = new File("").getAbsolutePath();
+    public static final String EXCEL_FILE = dirPath +"\\Data\\Open_Invoice_List.xlsx";
 
     private static int getLastFilledColumn(Sheet sheet) {
         int result = 0;
@@ -122,7 +121,7 @@ public class readexcel {
                 int lastFilledColumn = getLastFilledColumn(sheet);
                 //System.out.println(lastFilledColumn);
 
-                FileOutputStream fileOut = new FileOutputStream(absolutePath +"\\Data\\Open_Invoice_List.xlsx");
+                FileOutputStream fileOut = new FileOutputStream(dirPath +"\\Data\\Open_Invoice_List.xlsx");
                 wb.write(fileOut);
                 fileOut.close();
 //                Iterator rows = sheet.rowIterator();
@@ -149,25 +148,11 @@ public class readexcel {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
         //Switch driver to project driver @parvez \\resolved
-        System.setProperty("webdriver.chrome.driver", absolutePath+"\\drivers\\chromedriver.exe");
-        WebDriver driver = DriverManager.getDriver();
+        //flag is for switch between headless and headed
+        WebDriver driver = DriverManager.getDriver(false);
         //Flow should be created for AMTDirect @ Parvez
-        driver.get("https://app.amtdirect.com/");
-        amtUtilities.sleep(5000);
         loginModule.execute(driver);
-        amtUtilities.sleep(2000);
         driver.close();
-//        driver.manage().window().maximize();
-//        System.out.println("Window maximized");
-//        Thread.sleep(2000);
-//        driver.findElement(By.xpath("//*[@id=\"home\"]/div[6]/a[1]")).click();
-//        //String a = String.valueOf(file.toPath());
-//        //System.out.println(a);
-//        Thread.sleep(5000);
-//        System.out.println("Download completed.");
-//        driver.close();
-//        String pathName = new File("").getAbsolutePath();
-////        System.out.println(pathName);
 //        readXLSFile();
     }
 }
