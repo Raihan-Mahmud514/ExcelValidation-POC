@@ -1,27 +1,20 @@
 package excelvalidation.driver;
 
-import io.testproject.sdk.DriverBuilder;
-import io.testproject.sdk.drivers.ReportType;
-import io.testproject.sdk.drivers.web.EdgeDriver;
-import io.testproject.sdk.drivers.web.FirefoxDriver;
-import io.testproject.sdk.drivers.web.SafariDriver;
+import excelvalidation.readexcel;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import excelvalidation.readexcel;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeOptions;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.safari.SafariOptions;
 
-import java.io.File;
-import java.lang.System;
 import java.util.HashMap;
+
+import static excelvalidation.readexcel.createDir;
+import static excelvalidation.readexcel.dirPath;
 
 public class DriverManager {
     public static   WebDriver getDriver(boolean flag) throws Exception {
-        System.setProperty("webdriver.chrome.driver", readexcel.dirPath +"\\drivers\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", dirPath +"\\drivers\\chromedriver.exe");
         WebDriver driver = chromeDriver(flag);
         return driver;
     }
@@ -32,7 +25,8 @@ public class DriverManager {
     }
 
     private static ChromeOptions defaultChromeOptions(boolean flag) throws Exception {
-        String downloadFilepath = readexcel.dirPath+"\\Data";
+        createDir(dirPath,"Data");
+        String downloadFilepath = dirPath+"\\Data";
         HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
         chromePrefs.put("profile.default_content_settings.popups", 0);
         chromePrefs.put("download.default_directory", downloadFilepath);

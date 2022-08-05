@@ -1,6 +1,11 @@
 package excelvalidation;
 
-import excelvalidation.util.amtUtilities;
+
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+import excelvalidation.util.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.poi.ss.usermodel.Cell;
@@ -10,6 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.io.*;
@@ -17,6 +23,8 @@ import java.util.Iterator;
 import excelvalidation.driver.DriverManager;
 import excelvalidation.module.*;
 public class readexcel {
+    public static ExtentReports extent;
+    public static ExtentTest test;
 
 
     public static final String dirPath = new File("").getAbsolutePath();
@@ -173,14 +181,28 @@ public class readexcel {
     public static void main(String[] args) throws Exception {
 //        File file = new File("C:\\Users\\DSi\\Downloads\\Data Bleanding File Two.xlsx");
 //        file.delete();
+        //Reports
+
+        automationReporter.initializeReporter();
+
         //create a new download directory if it doesn't exist already, skip if there is already one
-        createDir(dirPath,"Data"); // we can also clean up file before running the test each time
+        //        createDir(dirPath,"Data"); // we can also clean up file before running the test each time
         //Switch driver to project driver @parvez \\resolved
         WebDriver driver = DriverManager.getDriver(false); //flag is for switch between headless and headed
         //Flow should be created for AMTDirect @ Parvez
-        loginModule.execute(driver);
-        apManagerModule.execute(driver);
-        moveFiles(dirPath);
+        automationReporter.startReporter("Login Test");
+           loginModule.execute(driver,test);
+        automationReporter.endReporter();
+        automationReporter.startReporter("AP Module");
+          apManagerModule.execute(driver,test);
+        automationReporter.endReporter();
+//        moveFiles(dirPath);
+//        extent.endTest(test);
+//        extent.flush();
+
+
+        automationReporter.closeReporter();
+
         System.out.println("I am here");
         driver.close();
 //        readXLSFile();
