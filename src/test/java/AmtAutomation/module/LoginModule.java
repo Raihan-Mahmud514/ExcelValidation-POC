@@ -18,7 +18,7 @@ public class LoginModule {
         test.log(LogStatus.PASS,"Able to navigate to AMT");
         AmtUtilities.sleep(3000);
         softAssert.assertEquals(driver.getTitle(), "AMTdirect :: Login");
-        test.log(LogStatus.PASS,"Login page title matched");
+        test.log(LogStatus.PASS,"Landed on login page");
         driver.findElement(By.cssSelector("#txtUSER_NAME")).sendKeys(loginData.get("userName"));
         driver.findElement(By.cssSelector("#txtPassword")).sendKeys(loginData.get("password"));
         driver.findElement(By.cssSelector("#txtClient_Number")).sendKeys(loginData.get("clientId"));
@@ -30,14 +30,14 @@ public class LoginModule {
             hardAssert.assertEquals(driver.getTitle(), "AMTdirect :: Index");
             test.log(LogStatus.PASS,"Homepage title matched");
         } catch(AssertionError e) {
-            test.log(LogStatus.FAIL,"Title Did Not Matched, Skipping The Rest of The Test");
+            test.log(LogStatus.FAIL,"Title did not matched");
         }
         try{
             //Assertion to be placed here
             hardAssert.assertEquals(driver.getTitle(), "Homepage");
             test.log(LogStatus.PASS,"Homepage title matched");
         } catch(AssertionError e) {
-            test.log(LogStatus.FAIL,"Homepage Title Did Not Matched, Continuing rest of the test");
+            test.log(LogStatus.FAIL,"Homepage Title did not matched, Continuing rest of the test");
         }
         AmtUtilities.sleep(2000);
 //        automationReporter.endReporter();
