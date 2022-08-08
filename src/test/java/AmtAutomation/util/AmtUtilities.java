@@ -97,6 +97,25 @@ public class AmtUtilities {
             break;
         }
         return "\\"+dataFile;
+        // navigate to chrome downloads
+//        driver.get("chrome://downloads");
+//
+//        JavascriptExecutor js1 = (JavascriptExecutor)driver;
+//        // wait until the file is downloaded
+//        Long percentage = (long) 0;
+//        while ( percentage!= 100) {
+//            try {
+//                percentage = (Long) js1.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#downloadsList downloads-item').shadowRoot.querySelector('#progress').value");
+//                //System.out.println(percentage);
+//            }catch (Exception e) {
+//                // Nothing to do just wait
+//            }
+//            Thread.sleep(1000);
+//        }
+//        // get the latest downloaded file name
+//        String fileName = (String) js1.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#downloadsList downloads-item').shadowRoot.querySelector('div#content #file-link').text");
+//        return fileName;
+
    }
 
 //    public static void readXLSFile(String fileName) {
@@ -167,11 +186,11 @@ public class AmtUtilities {
         catch(IOException e1) {
             e1.printStackTrace();
         }
-        Sheet sheet = wbook.getSheetAt(sheetNumber);
+        Sheet sheet = wbook.getSheetAt((int) sheetNumber);
         //getting the XSSFSheet object at given index
-        Row row = sheet.getRow(vRow);
+        Row row = sheet.getRow((int) vRow);
         //returns the logical row
-        Cell cell = row.getCell(vColumn);
+        Cell cell = row.getCell((int) vColumn);
         CellType type = cell.getCellTypeEnum();
         if (type == CellType.STRING) {
             value = cell.getStringCellValue();

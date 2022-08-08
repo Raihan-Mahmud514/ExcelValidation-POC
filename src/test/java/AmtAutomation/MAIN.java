@@ -17,7 +17,7 @@ public class MAIN {
         AutomationReporter.initializeReporter();
         //Driver Instance
         WebDriver driver = DriverManager.getDriver(false);//flag is for switch between headless and headed
-        //Flow should be created for AMTDirect @ Parvez
+        //Login and AP Manager Flow
        AutomationReporter.startReporter("Login Test");
            LoginModule.execute(driver,test);
         AutomationReporter.endReporter();

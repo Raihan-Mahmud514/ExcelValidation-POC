@@ -1,16 +1,24 @@
 package AmtAutomation.module;
 import AmtAutomation.util.AmtAssertions;
+import AmtAutomation.util.JsonReader;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.Assertion;
+
+import java.util.HashMap;
+
 import static AmtAutomation.MAIN.dataPath;
 import static AmtAutomation.MAIN.dirPath;
 import static AmtAutomation.util.AmtUtilities.*;
 public class APManagerModule {
     public static void execute(WebDriver driver, ExtentTest test) throws Exception{
         Assertion hardAssert = AmtAssertions.initializeHardAsserts();
+        HashMap<String , String> CellData = JsonReader.configReader("ValidateCell.json");
+//        System.out.println( CellData.get("sheetNumber")+ CellData.get("rowNumber")+ CellData.get("columnNumber")+ CellData.get("expectedValue"));
+        System.out.println(CellData.get("sheetNumber"));
+        System.out.println(CellData.get("expectedValue"));
         moveFiles(dirPath,"Data");
         System.out.println("Navigating AP Manager");
         sleep(5000);
@@ -24,14 +32,15 @@ public class APManagerModule {
         sleep(15000);
         driver.findElement(By.xpath("//div[@class='divReportIcons divReportIcons_rfp']//span[@class='k-sprite a-icon file-xl']")).click();
         test.log(LogStatus.PASS,"Able to download the data");
-        sleep(80000);
+        sleep(60000);
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[1]);
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
         String fileName = getFile(driver);
         //readXLSFile(dataPath+fileName);
+
         try{
-            hardAssert.assertTrue(ValidateDoubleData(dataPath+fileName, 0,  4, 8, 100.0));
+            hardAssert.assertTrue(ValidateDoubleData(dataPath+fileName, Integer.parseInt(CellData.get("sheetNumber")),  Integer.parseInt(CellData.get("rowNumber")),Integer.parseInt(CellData.get("columnNumber")), Double.parseDouble(CellData.get("expectedValue"))));
             test.log(LogStatus.PASS,"Invoice amount matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Invoice amount did not matched");

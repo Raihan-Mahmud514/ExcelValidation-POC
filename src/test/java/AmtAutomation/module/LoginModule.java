@@ -24,22 +24,18 @@ public class LoginModule {
         driver.findElement(By.cssSelector("#txtClient_Number")).sendKeys(loginData.get("clientId"));
         driver.findElement(By.cssSelector("input[value='Log in']")).click();
         test.log(LogStatus.PASS,"Login Successful");
-        System.out.println(driver.getTitle());
         try{
-            //Assertion to be placed here
             hardAssert.assertEquals(driver.getTitle(), "AMTdirect :: Index");
             test.log(LogStatus.PASS,"Homepage title matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Title did not matched");
         }
         try{
-            //Assertion to be placed here
             hardAssert.assertEquals(driver.getTitle(), "Homepage");
             test.log(LogStatus.PASS,"Homepage title matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Homepage Title did not matched, Continuing rest of the test");
         }
         AmtUtilities.sleep(2000);
-//        automationReporter.endReporter();
     }
 }
