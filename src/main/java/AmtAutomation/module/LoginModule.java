@@ -8,6 +8,9 @@ import org.openqa.selenium.WebDriver;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
 import java.util.HashMap;
+
+import static AmtAutomation.util.AmtUtilities.takeSnapShot;
+
 public class LoginModule {
     public static void execute(WebDriver driver, ExtentTest test) throws Exception{
         Assertion hardAssert = AmtAssertions.initializeHardAsserts();
@@ -35,6 +38,7 @@ public class LoginModule {
             test.log(LogStatus.PASS,"Homepage title matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Homepage Title did not matched, Continuing rest of the test");
+            takeSnapShot(driver,"Homepage.png");
         }
         AmtUtilities.sleep(2000);
     }

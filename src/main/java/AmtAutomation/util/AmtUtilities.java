@@ -3,6 +3,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import java.io.*;
 import java.text.DateFormat;
@@ -20,6 +22,18 @@ public class AmtUtilities {
             /// throw new Exception("Pause between steps was interrupted", e);
             e.printStackTrace();
         }
+    }
+    public static void takeSnapShot(WebDriver webdriver , String filename) throws Exception{
+//Convert web driver object to TakeScreenshot
+        TakesScreenshot scrShot =((TakesScreenshot)webdriver);
+//Call getScreenshotAs method to create image file
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+//Move image file to new destination
+        createDir(dirPath,"\\Screenshot");
+
+        File DestFile=new File(dirPath+"\\Screenshot\\"+filename);
+//Copy file at destination
+        FileUtils.copyFile(SrcFile, DestFile);
     }
     public static void moveFiles(String path, String dir) throws Exception{
         File src = new File(path+"\\"+dir);
