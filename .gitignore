@@ -4,6 +4,6 @@ excelvalidation-POC.iml
 Data
 DataVault
 Reports
-Config/Credentials.js
+Config/Credentials.json
 ReportsVault
 out
