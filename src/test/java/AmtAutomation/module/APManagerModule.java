@@ -31,21 +31,20 @@ public class APManagerModule {
         driver.close();
         driver.switchTo().window(driver.getWindowHandles().toArray(new String[0])[0]);
         String fileName = getFile(driver);
-        readXLSFile(dataPath+fileName);
-//        if(ValidateDoubleData(dataPath+fileName, 2, 8, 100.0)){
-//            System.out.println("Assertion Successful");
-//            test.log(LogStatus.PASS,"Able to validate the invoice amount is equal amount is equal to -100");
-//        }
-//        else {
-//            System.out.println("Assertion Unsuccessful");
-//            test.log(LogStatus.FAIL,"Unable to validate the invoice amount is equal amount is equal to -100");
-//        }
+        //readXLSFile(dataPath+fileName);
         try{
-            //Assertion to be placed here
-            hardAssert.assertTrue(ValidateDoubleData(dataPath+fileName, 2, 8, 100.0));
+            hardAssert.assertTrue(ValidateDoubleData(dataPath+fileName, 0,  4, 8, 100.0));
             test.log(LogStatus.PASS,"Invoice Amount Matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Invoice Amount Did not Matched");
+        }
+        //Validating Date data
+        try{
+            //Assertion to be placed here
+            hardAssert.assertEquals(ValidateDateData(dataPath+fileName, 0, 4, 7), "01/01/2017");
+            test.log(LogStatus.PASS,"Invoice Date Matched");
+        } catch(AssertionError e) {
+            test.log(LogStatus.FAIL,"Invoice Date Did not Matched");
         }
         // Moving previous file to vault
         moveFiles(dirPath,"Data");
