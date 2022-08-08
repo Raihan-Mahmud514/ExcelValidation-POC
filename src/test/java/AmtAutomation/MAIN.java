@@ -7,6 +7,9 @@ import AmtAutomation.module.APManagerModule;
 import AmtAutomation.module.LoginModule;
 import AmtAutomation.util.AutomationReporter;
 import org.openqa.selenium.WebDriver;
+import org.testng.asserts.Assertion;
+import org.testng.asserts.SoftAssert;
+
 
 
 import java.io.File;
@@ -20,6 +23,8 @@ public class MAIN {
     public static final String dataPath = dirPath+"\\"+"Data";
 
     public static void main(String[] args) throws Exception {
+        Assertion hardAssert = new Assertion();
+        Assertion softAssert = new SoftAssert();
         //Start Reporter
         AutomationReporter.initializeReporter();
         //Driver Instance
