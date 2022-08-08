@@ -29,9 +29,9 @@ public class AmtUtilities {
 //Call getScreenshotAs method to create image file
         File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
 //Move image file to new destination
-        createDir(dirPath,"\\Screenshots");
+//        createDir(dirPath,"\\Screenshots");
 
-        File DestFile=new File(dirPath+"\\Screenshot\\"+filename);
+        File DestFile=new File(dirPath+"\\Screenshots\\"+filename);
 //Copy file at destination
         FileUtils.copyFile(SrcFile, DestFile);
     }
