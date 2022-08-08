@@ -13,7 +13,7 @@ public class LoginModule {
         Assertion hardAssert = AmtAssertions.initializeHardAsserts();
         SoftAssert softAssert = AmtAssertions.initializeSoftAsserts();
         System.out.println("Inside login function");
-        HashMap<String,String> loginData = JsonReader.configReader("credential.json");
+        HashMap<String,String> loginData = JsonReader.configReader("Credentials.json");
         driver.navigate().to(loginData.get("environment"));
         test.log(LogStatus.PASS,"Able to navigate to AMT");
         AmtUtilities.sleep(3000);
