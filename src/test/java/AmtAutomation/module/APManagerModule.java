@@ -1,18 +1,16 @@
 package AmtAutomation.module;
-
+import AmtAutomation.util.AmtAssertions;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.Assertion;
-import org.testng.asserts.SoftAssert;
-
 import static AmtAutomation.MAIN.dataPath;
 import static AmtAutomation.MAIN.dirPath;
 import static AmtAutomation.util.AmtUtilities.*;
-
 public class APManagerModule {
-    public static void execute(WebDriver driver, ExtentTest test, Assertion hardAssert, SoftAssert softAssert) throws Exception{
+    public static void execute(WebDriver driver, ExtentTest test) throws Exception{
+        Assertion hardAssert = AmtAssertions.initializeHardAsserts();
         moveFiles(dirPath,"Data");
         System.out.println("Navigating AP Manager");
         sleep(5000);

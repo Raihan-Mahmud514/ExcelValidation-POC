@@ -1,12 +1,9 @@
 package AmtAutomation.util;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.File;
 import java.io.FileReader;
 import java.util.HashMap;
-
 public class JsonReader {
     public static HashMap<String,String> configReader(String fileName) {
         JSONParser parser = new JSONParser();
@@ -20,7 +17,6 @@ public class JsonReader {
             {
                 data.put((String) key, (String) jsonObject.get(key));
             }
-
         } catch(Exception e) {
             e.printStackTrace();
         }  finally {

@@ -7,13 +7,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.Assertion;
 import org.testng.asserts.SoftAssert;
-
 import java.util.HashMap;
-
-
 public class LoginModule {
-    public static void execute(WebDriver driver, ExtentTest test, Assertion hardAssert,SoftAssert softAssert) throws Exception{
-
+    public static void execute(WebDriver driver, ExtentTest test) throws Exception{
+        Assertion hardAssert = AmtAssertions.initializeHardAsserts();
+        SoftAssert softAssert = AmtAssertions.initializeSoftAsserts();
         System.out.println("Inside login function");
         HashMap<String,String> loginData = JsonReader.configReader("credential.json");
         driver.navigate().to(loginData.get("environment"));
@@ -41,7 +39,6 @@ public class LoginModule {
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Homepage Title Did Not Matched, Continuing rest of the test");
         }
-
         AmtUtilities.sleep(2000);
 //        automationReporter.endReporter();
     }
