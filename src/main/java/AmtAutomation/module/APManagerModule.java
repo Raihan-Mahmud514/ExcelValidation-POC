@@ -45,7 +45,7 @@ public class APManagerModule {
         //Validating Date data
         try{
             //Assertion to be placed here
-            hardAssert.assertEquals(ValidateDateData(dataPath+fileName, 0, 4, 7), "01/01/2017");
+            hardAssert.assertEquals(ValidateDateData(dataPath+fileName, 1, 5, 8), "01/01/2017");
             test.log(LogStatus.PASS,"Invoice date matched");
         } catch(AssertionError e) {
             test.log(LogStatus.FAIL,"Invoice date did not matched");

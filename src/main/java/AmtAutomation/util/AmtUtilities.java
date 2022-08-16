@@ -200,11 +200,11 @@ public class AmtUtilities {
         catch(IOException e1) {
             e1.printStackTrace();
         }
-        Sheet sheet = wbook.getSheetAt((int) sheetNumber);
+        Sheet sheet = wbook.getSheetAt((int) sheetNumber-1);
         //getting the XSSFSheet object at given index
-        Row row = sheet.getRow((int) vRow);
+        Row row = sheet.getRow((int) vRow-1);
         //returns the logical row
-        Cell cell = row.getCell((int) vColumn);
+        Cell cell = row.getCell((int) vColumn-1);
         CellType type = cell.getCellTypeEnum();
         if (type == CellType.STRING) {
             value = cell.getStringCellValue();
@@ -242,11 +242,11 @@ public class AmtUtilities {
         catch(IOException e1) {
             e1.printStackTrace();
         }
-        Sheet sheet = wbook.getSheetAt(sheetNumber);
+        Sheet sheet = wbook.getSheetAt(sheetNumber-1);
         //getting the XSSFSheet object at given index
-        Row row = sheet.getRow(vRow);
+        Row row = sheet.getRow(vRow-1);
         //returns the logical row
-        Cell cell = row.getCell(vColumn);
+        Cell cell = row.getCell(vColumn-1);
         CellType type = cell.getCellTypeEnum();
 
         if(cell.getCellTypeEnum() == CellType.NUMERIC||cell.getCellTypeEnum() == CellType.FORMULA)
